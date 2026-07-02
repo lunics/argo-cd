@@ -1,0 +1,206 @@
+pocket-id:
+  timeZone: "Europe/Paris"
+  # -- Host where you will access the app without scheme or port.
+  host: "pocket-id.lunics.cloud"
+
+  # -- Encryption key used to encrypt sensitive data.
+  # Required: Generate with `openssl rand -base64 32`
+  encryptionKey: ""
+  
+  # -- Static API key that grants admin access.
+  # Creates an admin account called "Static API User".
+  staticApiKey: ""
+  
+  # ============================================
+  # Core Configuration
+  # ============================================
+  config:
+    # -- Specifies whether a config map should be created.
+    create: true
+    # -- Specifies name of a config map used to configure the pocket-id.
+    # If not filled, uses full name.
+    name: ""
+  
+    core:
+      # -- Log level. Options: debug, info, warn, error
+      logLevel: "info"
+  
+      # -- Whether to emit logs in JSON format
+      logJson: false
+  
+      # -- Internal URL for OIDC configuration.
+      # Use when APP_URL isn't accessible by OIDC clients.
+      internalAppUrl: ""
+  
+      # -- Number of days to retain audit logs.
+      auditLogRetentionDays: 90
+  
+      # -- Disable built-in rate limiting.
+      # Only disable if you have rate limiting configured in your reverse proxy.
+      disableRateLimiting: false
+  
+    audit:
+      # -- User configured local IPv6 ranges for the audit log.
+      localIPv6Ranges: ""
+  
+    telemetry:
+      # -- Enables OpenTelemetry tracing.
+      tracingEnabled: false
+      # -- Enables OpenTelemetry metrics.
+      metricsEnabled: false
+      # -- OpenTelemetry SDK environment variables.
+      # https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/
+      otel: {}
+  
+    ui:
+      # -- Whether to enable default settings for the UI or allow customizations
+      useDefaults: true
+  
+      settings:
+        app:
+          # -- The name of the application to be displayed in the UI
+          appName: "Pocket ID"
+          # -- Duration in minutes of a session before the user must sign in again
+          sessionDuration: 60
+          # -- Whether the user's email is pre-marked as verified for OIDC clients (typically used for testing)
+          emailsVerified: false
+          # -- Whether users can edit their own account details
+          allowOwnAccountEdit: true
+          # -- Whether to disable animations in the Admin UI
+          disableAnimations: false
+          # -- The page users are redirected to after signing in
+          homePageUrl: "/settings/account"
+          # -- Whether the user signup functionality is enabled. Options: "disabled", "withToken", "open"
+          allowUserSignups: "disabled"
+          # -- Assign these custom claims automatically to new users upon signup
+          signupDefaultCustomClaims: []
+          # -- Assign these groups automatically to new users upon signup
+          signupDefaultUserGroupIds: []
+          # -- A custom accent color for the UI
+          accentColor: "default"
+  
+        smtp:
+          # -- SMTP server hostname used to send outgoing emails
+          host: ""
+          # -- SMTP server port
+          port: ""
+          # -- Sender email address for outgoing emails
+          from: ""
+          # -- SMTP username for authentication
+          user: ""
+          # -- SMTP password for authentication
+          password: ""
+          # -- TLS option to use for SMTP. Options are 'none', 'starttls', or 'tls'
+          tls: "none"
+          # -- Whether to skip SMTP certificate verification (useful for self-signed certificates)
+          skipCertVerify: false
+  
+        email:
+          # -- Whether to send an email notification when a user logs in from a new device
+          loginNotificationEnabled: false
+          # -- Whether to allow admins to send one-time access sign-in links to the user's email
+          oneTimeAccessAsAdminEnabled: false
+          # -- Whether to allow unauthenticated users to request one-time access sign-in links sent to the user's email
+          #    (note: this reduces security significantly, as anyone with email access can sign in)
+          oneTimeAccessAsUnauthenticatedEnabled: false
+          # -- Send an email to the user when their API key is about to expire
+          apiKeyExpirationEnabled: false
+          # -- Send a verification email to users when they sign up or change their email address
+          verificationEnabled: false
+  
+        ldap:
+          # -- Whether to enable LDAP authentication
+          enabled: false
+          # -- URL of the LDAP server
+          url: ""
+          # -- LDAP bind distinguished name (DN)
+          bindDN: ""
+          # -- LDAP bind password for authentication
+          bindPassword: ""
+          # -- LDAP search base DN for queries
+          base: ""
+          # -- LDAP user search filter (default is typically fine for most setups)
+          userSearchFilter: "(objectClass=person)"
+          # -- LDAP group search filter (default is typically fine for most setups)
+          userGroupSearchFilter: "(objectClass=groupOfNames)"
+          # -- Whether to skip LDAP certificate verification (useful for self-signed certificates)
+          skipCertVerify: false
+          # -- When enabled, users removed from LDAP will be disabled rather than deleted from the system
+          softDeleteUsers: false
+  
+          attributes:
+            user:
+              # -- LDAP attribute for the unique identifier of the user
+              uniqueIdentifier: ""
+              # -- LDAP attribute for the username of the user
+              username: ""
+              # -- LDAP attribute for the email address of the user
+              email: ""
+              # -- LDAP attribute for the user's first name
+              firstName: ""
+              # -- LDAP attribute for the user's last name
+              lastName: ""
+              # -- LDAP attribute for the user's profile picture
+              profilePicture: ""
+  
+            group:
+              # -- LDAP attribute for querying group members
+              member: "member"
+              # -- LDAP attribute for the unique identifier of the group
+              uniqueIdentifier: ""
+              # -- LDAP attribute for the group's name
+              name: ""
+              # -- LDAP attribute for the admin group (used to assign Admin privileges)
+              adminGroup: ""
+  
+  # ============================================
+  # File Backend Configuration
+  # ============================================
+  fileBackend:
+    # -- The backend used for file storage. Options: filesystem, s3, database
+    type: "filesystem"
+  
+    # -- The path where uploaded files are stored (only for filesystem/s3)
+    uploadPath: "data/uploads"
+  
+    s3:
+      # -- S3 bucket name (required if type is s3)
+      bucket: ""
+      # -- S3 region (required if type is s3)
+      region: ""
+      # -- S3 endpoint URL (required if type is s3)
+      endpoint: ""
+      # -- Force path style for S3
+      forcePathStyle: false
+      # -- Disable default integrity checks for S3
+      disableDefaultIntegrityChecks: false
+      # -- S3 access key ID (required if type is s3)
+      accessKeyId: ""
+      # -- S3 secret access key (required if type is s3)
+      secretAccessKey: ""
+  
+  database:
+    # -- Connection string for the database.
+    #    - For sqlite: file:data/pocket-id.db
+    #    - For postgres: postgres:// or postgresql://user:password@host:port/dbname
+    connectionString: "file:data/pocket-id.db"
+
+  secret:
+    create: false
+    name: ""
+
+  persistence:
+    data:
+      enabled: true
+      storageClass: ""
+      existingClaim: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      annotations:
+        helm.sh/resource-policy: keep
+        argocd.argoproj.io/sync-options: Delete=false
+      # hostPath:
+      #   enabled: true
+      #   path: "/kube/pocket-id"
+      #   # -- Optional hostPath type (e.g. Directory, DirectoryOrCreate, File, FileOrCreate).
+      #   type: ""
