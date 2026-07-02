@@ -27,6 +27,7 @@ spec:
             serverSideApply: true
           - name:            pocket-id
             serverSideApply: true
+            serverSideDiff:  true
           - name:            homepage
           - name:            sonarr
           - name:            minecraft
@@ -35,6 +36,9 @@ spec:
   template:
     metadata:
       name: "{{ .name }}"
+      annotations:
+        argocd.argoproj.io/compare-options:
+          '{{ printf "%s=%s" "ServerSideDiff" (dig "serverSideDiff" "false" . | toString) }}'
     spec:
       project: default
       source:
