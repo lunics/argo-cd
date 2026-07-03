@@ -1,6 +1,7 @@
 keycloak:
+  quay.io/keycloak/keycloak
   image:
-    repository: bitnamilegacy/keycloak      # bitnami/keycloak is not free
+    repository: bitnamilegacy/keycloak      # bitnami/keycloak is not free, and bitnamilegacy/keycloak is outdated
 
   postgresql:
     image:
