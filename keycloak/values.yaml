@@ -1,8 +1,8 @@
 keycloak:
   postgresql:
     enabled: false
-  production: true
-  hostnameStrict: true
+  production: false
+  hostnameStrict: false
   adminRealm: master
   auth:
     adminUser: user
