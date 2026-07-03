@@ -3,6 +3,8 @@ keycloak:
     repository: bitnamilegacy/keycloak      # bitnami/keycloak is not free
 
   postgresql:
+    image:
+      repository: bitnamilegacy/postgresql
     enabled: true
     auth:
       database: keycloak
