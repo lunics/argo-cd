@@ -28,7 +28,7 @@ spec:
           # - name:            pocket-id
           #   serverSideApply: true
           #   serverSideDiff:  true
-          - name:            keycloak
+          # - name:            keycloak
           - name:            homepage
           - name:            sonarr
           - name:            minecraft
