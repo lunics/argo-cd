@@ -9,7 +9,7 @@ keycloak:
         userPasswordKey: password
 
   externalDatabase:
-    host:     keycloak-postgres.keycloak.svc.cluster.local
+    host:     keycloak-postgres-rw.keycloak.svc.cluster.local
     port:     5432
     database: keycloak
     user:     keycloak
