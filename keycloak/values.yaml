@@ -3,7 +3,7 @@ keycloak:
     repository: bitnamilegacy/keycloak      # bitnami/keycloak is not free
 
   postgresql:
-    enabled: false
+    enabled: true
     auth:
       database: keycloak
       username: keycloak
@@ -11,14 +11,14 @@ keycloak:
       secretKeys:
         userPasswordKey: password
 
-  externalDatabase:
-    host:     keycloak-postgres-rw.keycloak.svc.cluster.local
-    port:     5432
-    database: keycloak
-    user:     keycloak
-    existingSecret:            keycloak-secrets
-    existingSecretUserKey:     username
-    existingSecretPasswordKey: password
+  # externalDatabase:
+  #   host:     keycloak-postgres-rw.keycloak.svc.cluster.local
+  #   port:     5432
+  #   database: keycloak
+  #   user:     keycloak
+  #   existingSecret:            keycloak-secrets
+  #   existingSecretUserKey:     username
+  #   existingSecretPasswordKey: password
 
   production: false
   hostnameStrict: false
