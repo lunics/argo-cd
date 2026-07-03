@@ -10,6 +10,9 @@ pocket-id:
   # -- Static API key that grants admin access.
   # Creates an admin account called "Static API User".
   staticApiKey: ""
+
+  # -- Trust proxy headers (e.g. X-Forwarded-For) from the reverse proxy in front of pocket-id
+  trustProxy: true
   
   # ============================================
   # Core Configuration
@@ -204,3 +207,18 @@ pocket-id:
       #   path: "/kube/pocket-id"
       #   # -- Optional hostPath type (e.g. Directory, DirectoryOrCreate, File, FileOrCreate).
       #   type: ""
+
+cnpg-cluster:
+  type: postgresql
+  mode: standalone
+  version:
+    postgresql: "18"
+  cluster:
+    instances: 1
+    imageCatalogRef:
+      kind: ClusterImageCatalog
+      name: postgresql
+    storage:
+      size: 1Gi
+    initdb:
+      database: pocket_id
