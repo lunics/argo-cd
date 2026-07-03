@@ -1,0 +1,14 @@
+keycloak:
+  postgresql:
+    enabled: false
+  production: true
+  hostnameStrict: true
+  adminRealm: master
+  auth:
+    adminUser: user
+    # administrator password for the new user
+    adminPassword: ""
+    # Existing secret containing Keycloak admin password
+    existingSecret: ""
+    # Key where the Keycloak admin password is being stored inside the existing secret
+    passwordSecretKey: ""
