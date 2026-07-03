@@ -25,9 +25,9 @@ spec:
           - name:            cloudnative-pg
             namespace:       cnpg-system
             serverSideApply: true
-          - name:            pocket-id
-            serverSideApply: true
-            serverSideDiff:  true
+          # - name:            pocket-id
+          #   serverSideApply: true
+          #   serverSideDiff:  true
           - name:            homepage
           - name:            sonarr
           - name:            minecraft
