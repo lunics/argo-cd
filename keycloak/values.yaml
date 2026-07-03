@@ -1,6 +1,12 @@
 keycloak:
   postgresql:
-    enabled: false
+    enabled: true
+    auth:
+      database: keycloak
+      username: keycloak
+      existingSecret: keycloak-secret
+      secretKeys:
+        userPasswordKey: password
   production: false
   hostnameStrict: false
   adminRealm: master
@@ -9,6 +15,6 @@ keycloak:
     # administrator password for the new user
     adminPassword: ""
     # Existing secret containing Keycloak admin password
-    existingSecret: keycloak
+    existingSecret: keycloak-secret
     # Key where the Keycloak admin password is being stored inside the existing secret
     passwordSecretKey: admin-password
