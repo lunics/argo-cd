@@ -6,7 +6,7 @@ dependencies:
   - name:       keycloak
     repository: https://charts.bitnami.com/bitnami
     version:    25.2.0
-  - name:       cluster
-    alias:      cnpg-cluster
-    repository: https://cloudnative-pg.github.io/charts
-    version:    0.6.1
+  # - name:       cluster
+  #   alias:      cnpg-cluster
+  #   repository: https://cloudnative-pg.github.io/charts
+  #   version:    0.6.1
