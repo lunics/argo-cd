@@ -9,6 +9,6 @@ keycloak:
     # administrator password for the new user
     adminPassword: ""
     # Existing secret containing Keycloak admin password
-    existingSecret: ""
+    existingSecret: keycloak
     # Key where the Keycloak admin password is being stored inside the existing secret
-    passwordSecretKey: ""
+    passwordSecretKey: admin-password
