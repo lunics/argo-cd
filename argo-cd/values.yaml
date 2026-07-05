@@ -1,0 +1,20 @@
+argo-cd:
+  fullnameOverride: argo-cd
+
+  configs:
+    secret:
+      createSecret: false
+
+  global:
+    domain: argo-cd.lunics.cloud
+  
+  server:
+    httproute:
+      enabled: true
+      parentRefs:
+        - name:        traefik-gateway
+          namespace:   traefik
+          sectionName: web
+        - name:        traefik-gateway
+          namespace:   traefik
+          sectionName: websecure
