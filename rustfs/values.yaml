@@ -1,0 +1,47 @@
+rustfs:
+  mode:
+    distributed:        # 4 pods and 16 pvcs(each pod has 4 pvcs) OR 16 pods and 16 pvcs(each pod has 1 pvc)
+      enabled: false
+    standalone:         # only one pod and one pvc
+      enabled: true
+      # existingClaim:
+      #   dataClaim:    # use existing pvc claim for data storage
+      #   logsClaim:    # use existing pvc claim for logs storage
+
+  replicaCount: 4       # number of cluster nodes
+
+  secret:
+    existingSecret: ""
+    # SECURITY: rendering fails by default unless one of the following is true:
+    #   1. `secret.existingSecret` names a Kubernetes Secret you control, or
+    #   2. `secret.rustfs.access_key` and `secret.rustfs.secret_key` are both
+    #      set to non-empty, non-default values, or
+    #   3. `secret.allowInsecureDefaults: true` is set (only for local dev).
+    # This prevents accidental deployment with the well-known default
+    # `rustfsadmin/rustfsadmin` credentials.
+    allowInsecureDefaults: false
+    rustfs:
+      access_key: ""
+      secret_key: ""
+
+  ingress.className: traefik    # nginx, traefik
+  gatewayApi:
+    enabled: true
+    gatewayClass: traefik
+    listeners:
+      http:
+        name: web
+        port: 8000
+      https:
+        name: websecure
+        port: 8443
+    hostname: rustfs.lunics.cloud
+    existingGateway:
+      name:      traefik-gateway
+      namespace: traefik
+
+  storageclass:
+    name:            local-path
+    dataStorageSize: 256Mi
+    logStorageSize:  256Mi
+    pvcAnnotations:  {}

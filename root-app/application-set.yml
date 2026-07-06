@@ -31,6 +31,7 @@ spec:
           #   serverSideApply: true
           #   serverSideDiff:  true
           # - name:            keycloak
+          - name:            rustfs
           - name:            homepage
           - name:            sonarr
           - name:            minecraft

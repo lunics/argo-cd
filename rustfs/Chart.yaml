@@ -1,0 +1,8 @@
+apiVersion:  v2
+name:        rustfs
+type:        application
+version:     0.1.0
+dependencies:
+  - name:       rustfs
+    repository: https://charts.rustfs.com
+    version:    0.8.0
