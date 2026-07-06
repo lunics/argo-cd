@@ -2,8 +2,23 @@ argo-cd:
   fullnameOverride: argo-cd
 
   configs:
+    params:
+      server.insecure: true   # false: argocd-server itself terminates TLS and serves HTTPS on port 443
+                              # true: TLS traffic managed by HTTPRoute
     secret:
       createSecret: false
 
   global:
     domain: argo-cd.lunics.cloud
+  
+  server:
+    httproute:
+      enabled: true
+      hostnames:
+        - argo-cd.lunics.cloud
+      parentRefs:
+        - group:       gateway.networking.k8s.io	# required to avoid OutOfSync
+          kind:        Gateway
+          name:        traefik-gateway
+          namespace:   traefik
+          sectionName: websecure
