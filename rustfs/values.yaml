@@ -17,7 +17,9 @@ rustfs:
       access_key: badcred
       secret_key: badcred
 
-  ingress.className: traefik    # nginx, traefik
+  ingress:
+    enabled: false
+
   gatewayApi:
     enabled: true
     gatewayClass: traefik
