@@ -7,15 +7,3 @@ argo-cd:
 
   global:
     domain: argo-cd.lunics.cloud
-  
-  server:
-    httproute:
-      enabled: true
-      hostnames:
-        - argo-cd.lunics.cloud
-      parentRefs:
-        - group:       gateway.networking.k8s.io    # required to avoid OutOfSync
-          kind:        Gateway
-          name:        traefik-gateway
-          namespace:   traefik
-          sectionName: websecure
