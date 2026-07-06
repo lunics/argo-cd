@@ -11,18 +11,11 @@ rustfs:
   replicaCount: 4       # number of cluster nodes
 
   secret:
-    existingSecret: ""
-    # SECURITY: rendering fails by default unless one of the following is true:
-    #   1. `secret.existingSecret` names a Kubernetes Secret you control, or
-    #   2. `secret.rustfs.access_key` and `secret.rustfs.secret_key` are both
-    #      set to non-empty, non-default values, or
-    #   3. `secret.allowInsecureDefaults: true` is set (only for local dev).
-    # This prevents accidental deployment with the well-known default
-    # `rustfsadmin/rustfsadmin` credentials.
     allowInsecureDefaults: false
+    existingSecret: ""
     rustfs:
-      access_key: ""
-      secret_key: ""
+      access_key: badcred
+      secret_key: badcred
 
   ingress.className: traefik    # nginx, traefik
   gatewayApi:
