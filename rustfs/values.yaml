@@ -12,10 +12,7 @@ rustfs:
 
   secret:
     allowInsecureDefaults: false
-    existingSecret: ""
-    rustfs:
-      access_key: badcred
-      secret_key: badcred
+    existingSecret: rustfs-secret
 
   ingress:
     enabled: false
